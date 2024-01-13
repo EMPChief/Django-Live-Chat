@@ -6,9 +6,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.messages import error
-from django.contrib import messages
+from .my_dec import need_log_out
 
-
+@need_log_out('index')
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -27,7 +27,7 @@ def register(request):
     context = {'form': form}
     return render(request, 'account/register.html', context)
 
-
+@need_log_out('index')
 def custom_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -42,7 +42,7 @@ def custom_login(request):
 
     return render(request, 'account/login.html')
 
-
+@login_required(login_url='/login/')
 def custom_logout(request):
     logout(request)
     return redirect('index')
