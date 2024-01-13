@@ -1,0 +1,31 @@
+<DOCTYPE html>
+    <html>
+        <head>
+            <title>{%block title%}{%endblock%} | EMPChat App</title>
+            <script src='https://cdn.tailwindcss.com'></script>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta charset="utf-8">
+        </head>
+    <body class="bg-green-300">
+        <nav class="flex items-center justify-between px-4 py-6 bg-teal-800">
+            <div>
+                <a href="#" class="text-white text-xl font-bold">EMPChat</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="/login/" class="px-5 py-3 rounded-xl text-white hover:text-gray-200">Login</a>
+                <a href="/Register/" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:text-gray-200">Register</a>
+                <a href="/Logout/" class="px-5 py-3 rounded-xl text-white bg-red-700 hover:text-gray-200">Logout</a>
+            </div>
+        </nav>
+    
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+
+        </footer>
+
+    </body>
+</html>
