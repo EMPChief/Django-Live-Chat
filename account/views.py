@@ -1,28 +1,33 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect
 from django.contrib import messages
-from .models import UserProfile
-# Create your views here.
+from django.contrib.messages import error
+from django.contrib import messages
+
+
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            userprofile = UserProfile(user=user)
-            userprofile.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
-            return redirect('login')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('/')
     else:
-        form = UserCreationForm()
-        for field in form.fields:
-            form.fields[field].widget.attrs.update({
-                'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            })
+        form = SignUpForm()
 
     context = {'form': form}
     return render(request, 'account/register.html', context)
+
+
 def custom_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
