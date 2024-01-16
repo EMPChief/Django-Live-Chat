@@ -14,5 +14,5 @@ def room(request, slug):
     return render(request, 'room/room.html', {
         'room': room_obj,
         'messages': messages,
-        'room_name': room_obj.name
+        'room_slug': room_obj.slug
     })
