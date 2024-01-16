@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% block title %}Rooms{% endblock %}
+
+{% block content %}
+<div class="p-10 lg:p-20 text-center">
+    <h1 class="text-5xl font-bold text-teal-800">Rooms</h1>
+</div>
+<div class="w-full flex flex-wrap items-center">
+    {% for room in rooms %}
+    <div class="w-full lg:w-1/4 px-3 py-3 transition duration-300 ease-in-out transform hover:scale-105">
+        <div class="p-4 bg-white rounded-2xl shadow-lg text-center">
+            <h2 class="text-2xl font-semibold text-teal-800">{{ room.name|slice:":30" }}</h2>
+            <a href="{% url 'room' room.slug %}" class="px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">Join</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

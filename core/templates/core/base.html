@@ -1,11 +1,27 @@
 <DOCTYPE html>
     <html>
         <head>
-            <title>{%block title%}{%endblock%} | EMPChat App</title>
-            <script src='https://cdn.tailwindcss.com'></script>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta charset="utf-8">
-        </head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="Chat for everyone">
+            <meta name="keywords" content="chat,everyone,here,fun">
+            <link rel="icon" href="https://favi.bjornmagne.com/emp2o2/favicon.ico">
+            <link rel="apple-touch-icon" sizes="180x180" href="https://favi.bjornmagne.com/emp4/apple-touch-icon.png">
+            <link rel="icon" type="image/png" href="https://favi.bjornmagne.com/emp4/favicon-32x32.png" sizes="32x32">
+            <link rel="icon" type="image/x-icon" href="https://favi.bjornmagne.com/emp4/favicon.ico">
+            <title>{%block title%}{%endblock%} | EMPChat</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+            <style>
+                .messages {
+                    height: 400px;
+                    overflow-y: auto;
+                }
+            </style>
+          </head>
     <body class="bg-green-300">
         <nav class="flex items-center justify-between px-4 py-6 bg-teal-800">
             <div>
@@ -17,6 +33,7 @@
                 <a href="{%url 'register'%}" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:text-gray-200">Register</a>
                 {% endif %}
                 {% if user.is_authenticated %}
+                <a href={%url 'rooms'%} class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:text-gray-200">Rooms</a>
                 <a href="{%url 'logout'%}" class="px-5 py-3 rounded-xl text-white bg-red-700 hover:text-gray-200">Logout</a>
                 {% endif %}
             </div>
@@ -26,7 +43,8 @@
             {% block content %}
             {% endblock %}
         </main>
-
+        {% block scripts %}
+        {% endblock %}
         <footer>
 
         </footer>
